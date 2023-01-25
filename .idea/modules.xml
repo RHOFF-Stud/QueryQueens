@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Docker_Module.iml" filepath="$PROJECT_DIR$/.idea/Docker_Module.iml" />
+      <module fileurl="file://$USER_HOME$/PycharmProjects/OpenAI-Apps/.idea/OpenAI-Apps.iml" filepath="$USER_HOME$/PycharmProjects/OpenAI-Apps/.idea/OpenAI-Apps.iml" />
     </modules>
   </component>
 </project>

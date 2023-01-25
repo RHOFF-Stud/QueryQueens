@@ -6,10 +6,20 @@ import time
 
 app = Flask(__name__)
 
-
+db = MongoEngine()
+app.config["MONGODB_SETTINGS"] = [
+    {
+        "db": "project1",
+        "host": "localhost",
+        "port": 27017,
+        "alias": "default",
+    }
+]
+db.init_app(app)
 DB_URI = ""
 app.config["MONGODB_HOST"] = DB_URI
-db = MongoEngine(app)
+
+db = MongoEngine(app=app)
 
 
 @app.route('/', methods=['GET'])
@@ -20,14 +30,36 @@ def home_page():
     return json_dump
 
 
-class TShirt(db.Document):
-    tshirt_id = int
-    name = ""
+class DataObject:
+    def toJSON(self):
+        dump = json.dumps(self, default=lambda o: o.__dict__,
+                          sort_keys=True)
+        return json.loads(dump)
+
+    def __init__(self):
+        pass
 
 
-@app.route('/api/db_populate', methods=['POST'])
+class TShirt(DataObject, db.Document):
+    def __init__(self):
+        super().__init__()
+        self.tshirt_id = int
+        self.name = ""
+
+
+@app.route('/api/db_populate', methods=['GET', 'POST'])
 def db_populate():
-    pass
+    try:
+        new_Tshirt = TShirt()
+
+        new_Tshirt.tshirt_id = 5
+        new_Tshirt.name = "Test"
+
+        dump = json.dumps(new_Tshirt.toJSON())
+
+        return dump
+    except Exception as e:
+        return {"Exception": str(e)}
 
 
 @app.route('/api/Products/TShirt', methods=['GET', 'POST'])
