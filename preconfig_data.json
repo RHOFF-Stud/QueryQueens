@@ -7,38 +7,6 @@
   "color": "black",
   "amount": 7,
   "product": "t-shirt"
-}, {
-  "_id": {
-    "$oid": "63d0fd0c8e2f9348609c71e9"
-  },
-  "type": "regular",
-  "size": "medium",
-  "color": "black",
-  "amount": 4,
-  "product": "t-shirt"
-},
-	{
-  "_id": {
-    "$oid": "63d0fd1d8e2f9348609c71eb"
-  },
-  "type": "regular",
-  "size": "large",
-  "color": "black",
-  "amount": 4,
-  "product": "t-shirt"
-}
-
-]
-
-}], "Storage": [{
-  "_id": {
-    "$oid": "63d0fcc48e2f9348609c71e5"
-  },
-  "type": "regular",
-  "size": "small",
-  "color": "black",
-  "amount": 7,
-  "product": "t-shirt"
 },{
   "_id": {
     "$oid": "63d0fd0c8e2f9348609c71e9"
@@ -174,7 +142,7 @@
   "color": "green",
   "amount": 5,
   "product": "t-shirt"
-}],
+}]}],
 
   "Customer": [{
 	"name": {"first" : "Klaus", "last" : "Klabauter"},

@@ -10,6 +10,7 @@ import time
 
 
 # For initial data population based on a preconfigured data set
+# not for production
 @app.route('/api/db_populate', methods=['GET', 'POST'])
 def db_populate():
     with open("preconfig_data.json", "r") as config_file:
@@ -29,13 +30,6 @@ def db_populate():
                         new_product.__setattr__(key, product[key])
                     new_product.save()
 
-            if collection == "Storage":
-                for storage in data[collection]:
-                    new_storage = Storage()
-                    for key in storage:
-                        new_storage.__setattr__(key, storage[key])
-                    new_storage.save()
-
             if collection == "Supplier":
                 for supplier in data[collection]:
                     new_supplier = Supplier()
@@ -46,17 +40,80 @@ def db_populate():
     return "Saved successfully"
 
 
-# Return of the full set or subset of all existing TShirts
-@app.route('/api/Products/TShirt', methods=['GET'])
-def db_get_product_tshirt():
-    tshirts = Product.objects.only('TShirt')
-    return jsonify(tshirts), 200
+# Return all existing data
+@app.route('/api/dump', methods=['GET'])
+def db_get_all():
+    objects = {}
+    for key in models:
+        objects[key] = models[key].objects()
+    return jsonify(objects), 200
 
 
-# Return of a specific TShirt based on ID
-@app.route('/api/TShirts/<tshirt_id>', methods=['GET', 'PUT', 'DELETE'])
-def db_each_TShirt(tshirt_id):
-    pass
+# Return all existing Products
+@app.route('/api/product/all', methods=['GET'])
+def db_get_all_products():
+    products = Product.objects()
+    return jsonify(products), 200
+
+
+# Return a subset of all existing Products
+@app.route('/api/product/<group>', methods=['GET'])
+def db_get_product(group: str):
+    products = Product.objects.only(group)
+    return jsonify(products), 200
+
+
+# 127.0.0.1:7777/api/product/TShirt/color=black&size=medium&type=regular
+# Return a subset of all existing Products based on a set of parameters
+@app.route('/api/product/<group>/<parameters>', methods=['GET'])
+def db_get_product_parameters(group: str, parameters: str):
+    products = json.loads(Product.objects.only(group).to_json())
+
+    matches = {group: []}
+
+    index = parameters.find("&")
+    if index < 0:
+        param_list = [parameters]
+    else:
+        param_list = parameters.split("&")
+
+    for product in products:
+        for obj in product[group]:
+            param_key, param_value = param_list[0].split("=")
+            for key in obj:
+                if key == param_key and obj[key] == param_value:
+                    matches[group].append(obj)
+
+            if index > 0:
+                for p in param_list[1:]:
+                    param_key, param_value = p.split("=")
+                    for match in matches[group]:
+                        found_match = False
+                        for key in match:
+                            if key == param_key and match[key] == param_value:
+                                found_match = True
+                                break
+                        if not found_match:
+                            matches[group].remove(match)
+
+    return jsonify(matches, 200)
+
+
+# Return of a specific product based on ID
+@app.route('/api/product/<group>/<id>', methods=['GET', 'PUT', 'DELETE'])
+def db_each_TShirt(group: str, ID: str):
+    product = Product.objects.only(group).where(object_id=ID)
+    return jsonify(product), 200
+
+# Use Cases to build:
+# Last Change on Database (PROBLEMO)
+# Shopping Cart
+# Order as Guest
+# Order as User
+# Order from Supplier
+# Registration
+# Login/Authentication
+# User Profile
 
 
 if __name__ == '__main__':

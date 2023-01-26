@@ -30,6 +30,15 @@ class Product(DynamicDocument):
         super().__init__()
 
 
-class Storage(DynamicDocument):
+class Logs(DynamicDocument):
     def __init__(self):
         super().__init__()
+
+
+models = {
+    "Customer": Customer,
+    "Supplier": Supplier,
+    "Order": Order,
+    "Product": Product,
+    "Logs": Logs
+}

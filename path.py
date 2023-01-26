@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_mongoengine import MongoEngine
 
+
 app = Flask(__name__)
 
 db = MongoEngine()
@@ -11,6 +12,7 @@ app.config["MONGODB_SETTINGS"] = [
 #        "port": 27017,
     }
 ]
+
 db.init_app(app)
 
 db = MongoEngine(app=app)
