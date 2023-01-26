@@ -6,14 +6,11 @@ app = Flask(__name__)
 db = MongoEngine()
 app.config["MONGODB_SETTINGS"] = [
     {
-        "db": "project1",
-        "host": "localhost",
-        "port": 27017,
-        "alias": "default",
+#        "db": "test",
+        "host": "mongodb+srv://queryqueens:SuperSicher123.@cluster0.r9xszy9.mongodb.net/test",
+#        "port": 27017,
     }
 ]
 db.init_app(app)
-DB_URI = ""
-app.config["MONGODB_HOST"] = DB_URI
 
 db = MongoEngine(app=app)

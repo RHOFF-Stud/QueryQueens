@@ -1,20 +1,35 @@
 import json
 
+from mongoengine import DynamicDocument, DynamicEmbeddedDocument
+
 from path import db
 
 
-class DataObject:
-    def toJSON(self):
-        dump = json.dumps(self, default=lambda o: o.__dict__,
-                          sort_keys=True)
-        return json.loads(dump)
-
+class Customer(DynamicDocument):
     def __init__(self):
-        pass
-
-
-class TShirt(DataObject, db.Document):
-    def __init__(self, ID: int, name: str):
         super().__init__()
-        self.tshirt_id = ID
-        self.name = name
+
+
+class Supplier(DynamicDocument):
+    def __init__(self):
+        super().__init__()
+
+
+class Order(DynamicDocument):
+    def __init__(self):
+        super().__init__()
+
+
+class TShirt(DynamicEmbeddedDocument):
+    def __init__(self):
+        super().__init__()
+
+
+class Product(DynamicDocument):
+    def __init__(self):
+        super().__init__()
+
+
+class Storage(DynamicDocument):
+    def __init__(self):
+        super().__init__()
