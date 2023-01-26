@@ -9,37 +9,6 @@ from flask import jsonify
 import time
 
 
-# For initial data population based on a preconfigured data set
-# not for production
-@app.route('/api/db_populate', methods=['GET', 'POST'])
-def db_populate():
-    with open("preconfig_data.json", "r") as config_file:
-        data = json.load(config_file)
-        for collection in data:
-            if collection == "Customer":
-                for customer in data[collection]:
-                    new_customer = Customer()
-                    for key in customer:
-                        new_customer.__setattr__(key, customer[key])
-                    new_customer.save()
-
-            if collection == "Product":
-                for product in data[collection]:
-                    new_product = Product()
-                    for key in product:
-                        new_product.__setattr__(key, product[key])
-                    new_product.save()
-
-            if collection == "Supplier":
-                for supplier in data[collection]:
-                    new_supplier = Supplier()
-                    for key in supplier:
-                        new_supplier.__setattr__(key, supplier[key])
-                    new_supplier.save()
-        config_file.close()
-    return "Saved successfully"
-
-
 # Return all existing data
 @app.route('/api/dump', methods=['GET'])
 def db_get_all():
@@ -99,21 +68,72 @@ def db_get_product_parameters(group: str, parameters: str):
     return jsonify(matches, 200)
 
 
-# Return of a specific product based on ID
-@app.route('/api/product/<group>/<id>', methods=['GET', 'PUT', 'DELETE'])
-def db_each_TShirt(group: str, ID: str):
-    product = Product.objects.only(group).where(object_id=ID)
-    return jsonify(product), 200
+# Adding a product based on ID to the Shopping Cart
+# Beta version, uses the cart-ID which could be circumvented by session management
+# This also could have been solved better, but I'm tired
+@app.route('/api/cart/add/<cart_id>/<ID>/<amount>', methods=['GET', 'POST'])
+def db_add_to_cart(cart_id: str, ID: str, amount: int):
+    products = json.loads(Product.objects().to_json())
+    for product in products:
+        for p_key in product:
+            if p_key != '_id':
+                for obj in product[p_key]:
+                    if obj['_id']['$oid'] == ID:
+                        try:
+                            cart = json.loads(Cart.objects(id=cart_id).to_json())
+                            print(cart)
+                            for item in cart[0]["items"]:
+                                if item["ID"] == ID:
+                                    index = cart[0]["items"].index(item)
+                                    cart[0]["items"][index]["amount"] = int(cart[0]["items"][index]["amount"]) + int(amount)
+                                    Cart.objects(id=cart_id).update(**{'items': cart[0]['items']})
+                                    break
+                            else:
+                                cart[0]["items"].append({"ID": ID, "amount": amount})
+                                Cart.objects(id=cart_id).update(**{'items': cart[0]['items']})
+                        except Exception as e:
+                            new_cart = Cart()
+                            new_cart.__setattr__("items", [{"ID": ID, "amount": amount}])
+                            new_cart.save()
+                        return "Saved successfully", 201
+    return "ID not found", 404
 
-# Use Cases to build:
-# Last Change on Database (PROBLEMO)
-# Shopping Cart
-# Order as Guest
-# Order as User
+
+# For clearing the entire cart
+# In 2.0: Method to only clear specific items
+@app.route('/api/cart/nuke/<cart_id>', methods=['GET', 'POST'])
+def db_nuke_cart(cart_id: str):
+    Cart.objects(id=cart_id).delete()
+    return "Cart deleted", 300
+
+
+# For Placing an Order as a Guest (Only option to place orders in 1.0)
+# Shipment data is passed as a string in the API-Call, this could be optimized
+@app.route('/api/order/guest/<cart_id>/<data>', methods=['GET', 'POST'])
+def db_guest_order(cart_id: str, data: str):
+    cart = json.loads(Cart.objects(id=cart_id).to_json())[0]
+    print(cart)
+
+    # changing the storage amounts for all ordered items (2.0 feature)
+
+    # Placing the Order
+    new_order = Order()
+    new_order.shipment_data = data
+    new_order.order_time = time.ctime()
+    new_order.items = cart["items"]
+    new_order.save()
+
+    # Deleting the cart
+    Cart.objects(id=cart_id).delete()
+    return "Order created", 200
+
+# Version 2.0
 # Order from Supplier
+# Last Change on Database
 # Registration
 # Login/Authentication
 # User Profile
+# Order as User
 
 
 if __name__ == '__main__':

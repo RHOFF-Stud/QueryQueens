@@ -1,8 +1,4 @@
-import json
-
 from mongoengine import DynamicDocument, DynamicEmbeddedDocument
-
-from path import db
 
 
 class Customer(DynamicDocument):
@@ -30,7 +26,7 @@ class Product(DynamicDocument):
         super().__init__()
 
 
-class Logs(DynamicDocument):
+class Cart(DynamicDocument):
     def __init__(self):
         super().__init__()
 
@@ -40,5 +36,5 @@ models = {
     "Supplier": Supplier,
     "Order": Order,
     "Product": Product,
-    "Logs": Logs
+    "Session": Cart
 }
