@@ -18,6 +18,7 @@ def db_get_all():
     return jsonify(objects), 200
 
 
+# Products:
 # Return all existing Products
 @app.route('/api/product/all', methods=['GET'])
 def db_get_all_products():
@@ -70,7 +71,6 @@ def db_get_product_parameters(group: str, parameters: str):
 
 # Adding a product based on ID to the Shopping Cart
 # Beta version, uses the cart-ID which could be circumvented by session management
-# This also could have been solved better, but I'm tired
 @app.route('/api/cart/add/<cart_id>/<ID>/<amount>', methods=['GET', 'POST'])
 def db_add_to_cart(cart_id: str, ID: str, amount: int):
     products = json.loads(Product.objects().to_json())
@@ -112,14 +112,13 @@ def db_nuke_cart(cart_id: str):
 @app.route('/api/order/guest/<cart_id>/<data>', methods=['GET', 'POST'])
 def db_guest_order(cart_id: str, data: str):
     cart = json.loads(Cart.objects(id=cart_id).to_json())[0]
-    print(cart)
 
     # changing the storage amounts for all ordered items (2.0 feature)
 
     # Placing the Order
     new_order = Order()
     new_order.shipment_data = data
-    new_order.order_time = time.ctime()
+    new_order.order_time = time.time()
     new_order.items = cart["items"]
     new_order.save()
 
