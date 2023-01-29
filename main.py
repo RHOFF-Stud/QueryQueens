@@ -71,32 +71,24 @@ def db_get_product_parameters(group: str, parameters: str):
 
 # Adding a product based on ID to the Shopping Cart
 # Beta version, uses the cart-ID which could be circumvented by session management
-@app.route('/api/cart/add/<cart_id>/<ID>/<amount>', methods=['GET', 'POST'])
-def db_add_to_cart(cart_id: str, ID: str, amount: int):
-    products = json.loads(Product.objects().to_json())
-    for product in products:
-        for p_key in product:
-            if p_key != '_id':
-                for obj in product[p_key]:
-                    if obj['_id']['$oid'] == ID:
-                        try:
-                            cart = json.loads(Cart.objects(id=cart_id).to_json())
-                            print(cart)
-                            for item in cart[0]["items"]:
-                                if item["ID"] == ID:
-                                    index = cart[0]["items"].index(item)
-                                    cart[0]["items"][index]["amount"] = int(cart[0]["items"][index]["amount"]) + int(amount)
-                                    Cart.objects(id=cart_id).update(**{'items': cart[0]['items']})
-                                    break
-                            else:
-                                cart[0]["items"].append({"ID": ID, "amount": amount})
-                                Cart.objects(id=cart_id).update(**{'items': cart[0]['items']})
-                        except Exception as e:
-                            new_cart = Cart()
-                            new_cart.__setattr__("items", [{"ID": ID, "amount": amount}])
-                            new_cart.save()
-                        return "Saved successfully", 201
-    return "ID not found", 404
+@app.route('/api/cart/add/<group>/<ID>/<cart_id>/<amount>', methods=['GET', 'POST'])
+def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
+    product = json.loads(Storage.objects(product=group, id=ID).to_json())
+    if product.__len__() == 0:
+        return "No product with that ID found", 404
+    else:
+        cart = json.loads(Cart.objects(id=cart_id).to_json())
+        if cart.__len__() == 0:
+            new_cart = Cart()
+            new_cart.__setattr__(ID, int(amount))
+            new_cart.save()
+            return "New Cart created", 201
+        else:
+            if ID in cart[0].keys():
+                Cart.objects(id=cart_id).update(**{ID: int(cart[0][ID]) + int(amount)})
+            else:
+                Cart.objects(id=cart_id).update(upsert=True, **{ID: int(amount)})
+            return "Cart updated", 202
 
 
 # For clearing the entire cart
@@ -123,16 +115,25 @@ def db_guest_order(cart_id: str, data: str):
     new_order.save()
 
     # Deleting the cart
-    Cart.objects(id=cart_id).delete()
+    #Cart.objects(id=cart_id).delete()
     return "Order created", 200
+
 
 # Version 2.0
 # Order from Supplier
-# Last Change on Database
+@app.route('/test/<group>/<parameters>', methods=['GET', 'POST'])
+def test_func(group: str, parameters: str):
+    products = json.loads(Product.objects.only(group).to_json())
+
+
 # Registration
 # Login/Authentication
 # User Profile
 # Order as User
+
+
+# Optional
+# Last Change on Database
 
 
 if __name__ == '__main__':
