@@ -73,7 +73,7 @@ def db_get_product_parameters(group: str, parameters: str):
 # Beta version, uses the cart-ID which could be circumvented by session management
 @app.route('/api/cart/add/<group>/<ID>/<cart_id>/<amount>', methods=['GET', 'POST'])
 def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
-    product = json.loads(Storage.objects(product=group, id=ID).to_json())
+    product = json.loads(Product.objects(product=group, id=ID).to_json())
     if product.__len__() == 0:
         return "No product with that ID found", 404
     else:
@@ -99,41 +99,71 @@ def db_nuke_cart(cart_id: str):
     return "Cart deleted", 300
 
 
-# For Placing an Order as a Guest (Only option to place orders in 1.0)
+# For Placing an Order as a Guest
 # Shipment data is passed as a string in the API-Call, this could be optimized
 @app.route('/api/order/guest/<cart_id>/<data>', methods=['GET', 'POST'])
 def db_guest_order(cart_id: str, data: str):
-    cart = json.loads(Cart.objects(id=cart_id).to_json())[0]
+    cart = json.loads(Cart.objects(id=cart_id).fields(id=0).to_json())
 
-    # changing the storage amounts for all ordered items (2.0 feature)
+    if cart.__len__() == 0:
+        return "Cart not found", 404
+    else:
+        for entry in cart[0]:
+            product = json.loads(Product.objects(id=entry).to_json())[0]
+            Product.objects(id=entry).update(**{"amount": product["amount"] - cart[0][entry]})
 
-    # Placing the Order
-    new_order = Order()
-    new_order.shipment_data = data
-    new_order.order_time = time.time()
-    new_order.items = cart["items"]
-    new_order.save()
+        # Placing the Order (Missing price calculation)
+        new_order = Order()
+        new_order.shipment_data = data
+        new_order.order_time = time.time()
+        new_order.items = cart[0]
+        new_order.save()
 
-    # Deleting the cart
-    #Cart.objects(id=cart_id).delete()
-    return "Order created", 200
+        # Deleting the cart
+        Cart.objects(id=cart_id).delete()
+        return "Order created", 200
 
 
 # Version 2.0
-# Order from Supplier
-@app.route('/test/<group>/<parameters>', methods=['GET', 'POST'])
-def test_func(group: str, parameters: str):
-    products = json.loads(Product.objects.only(group).to_json())
+# create a new user with the given username nad password
+@app.route('/api/user/create/<username>/<password>', methods=['GET', 'POST'])
+def user_create(username: str, password: str):
+    user = json.loads(User.objects(username=username).to_json())
+    if user.__len__() == 0:
+        new_user = User()
+        new_user.username = username
+        new_user.password = password
+        new_user.save()
+        return "User created", 200
+    else:
+        return "User with that username already exists", 403
 
 
-# Registration
-# Login/Authentication
-# User Profile
-# Order as User
+# Match the given username and password to ones in the database
+@app.route('/api/user/authenticate/<username>/<password>', methods=['GET', 'POST'])
+def user_authenticate(username: str, password: str):
+    user = json.loads(User.objects(username=username).to_json())
+
+    if user.__len__() == 0:
+        return "No User with that Username was found", 404
+    else:
+        if user[0]["password"] == password:
+            return "User authenticated", 100
+        else:
+            return "Incorrect password", 402
+
+
+# Return all user data except their password
+@app.route('/api/user/data/<username>', methods=['GET', 'POST'])
+def user_data(username: str):
+    user = User.objects(username=username).fields(password=0, id=0)
+    return jsonify(user)
 
 
 # Optional
 # Last Change on Database
+# Order from Supplier
+# Order as User
 
 
 if __name__ == '__main__':
