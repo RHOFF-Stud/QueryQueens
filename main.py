@@ -8,6 +8,9 @@ from flask import jsonify
 
 import time
 
+@app.route('/api/testing', methods=['GET'])
+def testreturn():
+    return "testing"
 
 # Return all existing data
 @app.route('/api/dump', methods=['GET'])

@@ -8,7 +8,7 @@ try:
     app.config["MONGODB_SETTINGS"] = [
         {
     #        "db": "test",
-            "host": "mongodb+srv://queryqueens:SuperSicher123.@cluster0.r9xszy9.mongodb.net/shop",
+            "host": "mongodb+srv://queryqueens:SuperSicher123.@localhost/shop",
     #        "port": 27017,
         }
     ]
