@@ -7,9 +7,11 @@ try:
     db = MongoEngine()
     app.config["MONGODB_SETTINGS"] = [
         {
-    #        "db": "test",
-            "host": "mongodb+srv://queryqueens:SuperSicher123.@localhost/shop",
-    #        "port": 27017,
+            "db": "bhhshop",
+            "host": "localhost",
+            "port": 27017,
+            "user": "apiuser",
+            "password": "Start1234!"
         }
     ]
 
