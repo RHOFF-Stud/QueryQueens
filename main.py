@@ -82,12 +82,15 @@ def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
             new_cart = Cart()
             new_cart.__setattr__(ID, int(amount))
             new_cart.save()
+            Log.objects().update(upsert=True, **{"Last": time.time()})
             return "New Cart created", 201
         else:
             if ID in cart[0].keys():
                 Cart.objects(id=cart_id).update(**{ID: int(cart[0][ID]) + int(amount)})
+                Log.objects().update(upsert=True, **{"Last": time.time()})
             else:
                 Cart.objects(id=cart_id).update(upsert=True, **{ID: int(amount)})
+                Log.objects().update(upsert=True, **{"Last": time.time()})
             return "Cart updated", 202
 
 
@@ -118,6 +121,7 @@ def db_guest_order(cart_id: str, data: str):
         new_order.order_time = time.time()
         new_order.items = cart[0]
         new_order.save()
+        Log.objects().update(upsert=True, **{"Last": time.time()})
 
         # Deleting the cart
         Cart.objects(id=cart_id).delete()
@@ -134,6 +138,7 @@ def user_create(username: str, password: str):
         new_user.username = username
         new_user.password = password
         new_user.save()
+        Log.objects().update(upsert=True, **{"Last": time.time()})
         return "User created", 200
     else:
         return "User with that username already exists", 403
@@ -162,6 +167,11 @@ def user_data(username: str):
 
 # Optional
 # Last Change on Database
+@app.route('/api/log/last', methods=['GET', 'POST'])
+def lastcall():
+    last_call = Log.objects().fields(id=0)
+    return jsonify(last_call)
+
 # Order from Supplier
 # Order as User
 

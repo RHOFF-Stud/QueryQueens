@@ -26,10 +26,16 @@ class Cart(DynamicDocument):
         super().__init__()
 
 
+class Log(DynamicDocument):
+    def __init__(self):
+        super().__init__()
+
+
 models = {
     "User": User,
     "Supplier": Supplier,
     "Order": Order,
     "Product": Product,
     "Cart": Cart,
+    'Log': Log
 }
