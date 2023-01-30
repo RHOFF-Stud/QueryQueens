@@ -10,5 +10,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=Start1234!
       - MONGO_INITDB_DATABASE=bhhshop
 
-  build:
-    network: host
+networks:
+  network1:
+    name: host
+    external: true
