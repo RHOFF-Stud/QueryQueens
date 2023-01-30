@@ -1,4 +1,4 @@
-FROM alpine:3.9
+FROM alpine:3.17
 
 WORKDIR /src
 
@@ -10,9 +10,9 @@ RUN apk add --no-cache python3 && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache
 
-COPY REQUIREMENTS.txt ./
+COPY requirements.txt ./
 
-RUN pip install -R ./REQUIREMENTS.txt
+RUN pip3 install -r ./requirements.txt
 
 COPY *.py ./
 
