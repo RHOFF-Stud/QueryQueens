@@ -10,7 +10,7 @@ try:
     db = MongoEngine()
     app.config["MONGODB_SETTINGS"] = [
         {
-            "db": os.getenv('bhhshop'),
+            "db": os.getenv('DATABASE'),
             "host": os.getenv('HOST'),
             "port": int(os.getenv('PORT')),
             #"user": os.getenv('USER'),
