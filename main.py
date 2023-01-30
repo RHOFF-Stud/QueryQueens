@@ -8,6 +8,10 @@ from flask import jsonify
 
 import time
 
+@app.route('/api')
+def helloWorld():
+    return "I'm fine!"
+
 @app.route('/api/testing', methods=['GET'])
 def testreturn():
     return "testing"
