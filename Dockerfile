@@ -12,7 +12,7 @@ RUN apk add --no-cache python3 && \
 
 COPY REQUIREMENTS.txt ./
 
-RUN pip install -R REQUIREMENTS.txt
+RUN pip install -R ./REQUIREMENTS.txt
 
 COPY *.py ./
 
