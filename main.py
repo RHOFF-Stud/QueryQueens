@@ -16,6 +16,38 @@ def helloWorld():
 def testreturn():
     return "testing"
 
+
+# For initial data population based on a preconfigured data set
+# not for production
+@app.route('/api/db_populate', methods=['GET', 'POST'])
+def db_populate():
+    with open("preconfig_data.json", "r") as config_file:
+        data = json.load(config_file)
+        for collection in data:
+            if collection == "User":
+                for user in data[collection]:
+                    new_customer = User()
+                    for key in user:
+                        new_customer.__setattr__(key, user[key])
+                    new_customer.save()
+
+            if collection == "Product":
+                for product in data[collection]:
+                    new_product = Product()
+                    for key in product:
+                        new_product.__setattr__(key, product[key])
+                    new_product.save()
+
+            if collection == "Supplier":
+                for supplier in data[collection]:
+                    new_supplier = Supplier()
+                    for key in supplier:
+                        new_supplier.__setattr__(key, supplier[key])
+                    new_supplier.save()
+        config_file.close()
+    return "Saved successfully"
+
+
 # Return all existing data
 @app.route('/api/dump', methods=['GET'])
 def db_get_all():

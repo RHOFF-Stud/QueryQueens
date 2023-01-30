@@ -144,21 +144,7 @@
   "product": "t-shirt"
 }]}],
 
-  "Customer": [{
-	"name": {"first" : "Klaus", "last" : "Klabauter"},
-	"address": {"street" : "Wurstlage 3", "postal_code" : "22123", "city" : "Hamburg"},
-	"contact": {"email" : "wampenpflege@klausk.de", "telephone" : "040-1234567", "mobile" : "0179-13128899"}
-},
-{
-	"name": {"first" : "Fritz", "last" : "Honka"},
-	"address": {"street" : "Goldene Straße 6", "postal_code" : "20123", "city" : "Hamburg"},
-	"contact": {"email" : "zaertlich@gmail.com", "telephone" : "040-666123", "mobile" : "0179-666666"}
-},
-{
-	"name": {"first" : "Horst", "last" : "Waldingen"},
-	"address": {"street" : "Bremsweg 88", "postal_code" : "21244", "city" : "Buchholz"},
-	"contact": {"email" : "stulle@freenet.de", "telephone" : "040-131216", "mobile" : "0179-951753"}
-}],
+
 	"Supplier": [{
   "_id": {
     "$oid": "63ce8eca6f3900c370bd88ec"
