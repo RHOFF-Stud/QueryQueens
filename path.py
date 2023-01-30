@@ -1,17 +1,20 @@
 from flask import Flask
 from flask_mongoengine import MongoEngine
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
 app = Flask(__name__)
 try:
     db = MongoEngine()
     app.config["MONGODB_SETTINGS"] = [
         {
-            "db": "bhhshop",
-            "host": "localhost",
-            "port": 27017,
-            "user": "apiuser",
-            "password": "Start1234!"
+            "db": os.getenv('bhhshop'),
+            "host": os.getenv('HOST'),
+            "port": os.getenv('PORT'),
+            "user": os.getenv('USER'),
+            "password": os.getenv('PASSWORD')
         }
     ]
 
