@@ -12,9 +12,9 @@ try:
         {
             "db": os.getenv('bhhshop'),
             "host": os.getenv('HOST'),
-            "port": os.getenv('PORT'),
-            "user": os.getenv('USER'),
-            "password": os.getenv('PASSWORD')
+            "port": int(os.getenv('PORT')),
+            #"user": os.getenv('USER'),
+            #"password": os.getenv('PASSWORD')
         }
     ]
 

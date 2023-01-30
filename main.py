@@ -160,7 +160,7 @@ def user_authenticate(username: str, password: str):
         return "No User with that Username was found", 404
     else:
         if user[0]["password"] == password:
-            return "User authenticated", 100
+            return "User authenticated", 200
         else:
             return "Incorrect password", 402
 
