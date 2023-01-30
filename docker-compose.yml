@@ -5,12 +5,8 @@ services:
   db:
     image: mongo
     restart: always
+    command: --network host
     environment:
       - MONGO_INITDB_ROOT_USERNAME=apiuser
       - MONGO_INITDB_ROOT_PASSWORD=Start1234!
       - MONGO_INITDB_DATABASE=bhhshop
-
-networks:
-  default:
-    external:
-      name: host
