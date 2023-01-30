@@ -3,10 +3,12 @@ version: '3.1'
 services:
 
   db:
-    network: host
     image: mongo
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=apiuser
       - MONGO_INITDB_ROOT_PASSWORD=Start1234!
       - MONGO_INITDB_DATABASE=bhhshop
+
+  build:
+    network: host
