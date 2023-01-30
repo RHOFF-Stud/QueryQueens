@@ -78,27 +78,35 @@ def db_get_product_parameters(group: str, parameters: str):
 
 # Adding a product based on ID to the Shopping Cart
 # Beta version, uses the cart-ID which could be circumvented by session management
-@app.route('/api/cart/add/<group>/<ID>/<cart_id>/<amount>', methods=['GET', 'POST'])
+@app.route('/api/cart/add/<group>/<ID>/<amount>', methods=['GET', 'POST'])
+@app.route('/api/cart/add/<group>/<ID>/<amount>/<cart_id>', methods=['GET', 'POST'])
 def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
     product = json.loads(Product.objects(product=group, id=ID).to_json())
     if product.__len__() == 0:
         return "No product with that ID found", 404
     else:
-        cart = json.loads(Cart.objects(id=cart_id).to_json())
-        if cart.__len__() == 0:
+        if cart_id is not None:
+            cart = json.loads(Cart.objects(id=cart_id).to_json())
+            if cart.__len__() == 0:
+                new_cart = Cart()
+                new_cart.__setattr__(ID, int(amount))
+                new_cart.save()
+                Log.objects().update(upsert=True, **{"Last": time.time()})
+                return "New Cart created", 201
+            else:
+                if ID in cart[0].keys():
+                    Cart.objects(id=cart_id).update(**{ID: int(cart[0][ID]) + int(amount)})
+                    Log.objects().update(upsert=True, **{"Last": time.time()})
+                else:
+                    Cart.objects(id=cart_id).update(upsert=True, **{ID: int(amount)})
+                    Log.objects().update(upsert=True, **{"Last": time.time()})
+                return "Cart updated",
+        else:
             new_cart = Cart()
             new_cart.__setattr__(ID, int(amount))
             new_cart.save()
             Log.objects().update(upsert=True, **{"Last": time.time()})
             return "New Cart created", 201
-        else:
-            if ID in cart[0].keys():
-                Cart.objects(id=cart_id).update(**{ID: int(cart[0][ID]) + int(amount)})
-                Log.objects().update(upsert=True, **{"Last": time.time()})
-            else:
-                Cart.objects(id=cart_id).update(upsert=True, **{ID: int(amount)})
-                Log.objects().update(upsert=True, **{"Last": time.time()})
-            return "Cart updated", 202
 
 
 # For clearing the entire cart
