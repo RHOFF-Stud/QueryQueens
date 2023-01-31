@@ -22,3 +22,13 @@
 | /api/user/nuke         | **/userid[63d0fe458e2f9348609c71f6]**                                                                                                  | test        | testing                                                           |
 | /api/user/update       | **/userid[63d0fe458e2f9348609c71f6] <br/>/username(String) <br/>/password(String)**                                                    | test        | testing                                                           |
 | /api/user/data         | **/username[String]**                                                                                                                  | test        | testing                                                           |
+
+# Return Codes:
+
++ 200 = Returned successfully
++ 201 = Created successfully
++ 202 = Deleted successfully
++ 400 = Bad Request
++ 403 = Forbidden Request
++ 404 = Not found
++ 409 = Forbidden Request
