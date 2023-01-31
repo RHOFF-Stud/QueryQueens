@@ -8,18 +8,20 @@ from flask import jsonify
 
 import time
 
+
 @app.route('/api')
 def helloWorld():
     return "I'm fine!"
 
-@app.route('/api/testing', methods=['GET'])
-def testreturn():
-    return "testing"
+
+@app.route('/api/test', methods=['GET'])
+def test_return():
+    return "test"
 
 
 # For initial data population based on a preconfigured data set
 # not for production
-@app.route('/api/db_populate', methods=['GET', 'POST'])
+@app.route('/api/populate', methods=['GET', 'POST'])
 def db_populate():
     with open("preconfig_data.json", "r") as config_file:
         data = json.load(config_file)
@@ -215,9 +217,9 @@ def user_data(username: str):
 # Optional
 # Last Change on Database
 @app.route('/api/log/last', methods=['GET', 'POST'])
-def lastcall():
-    last_call = Log.objects().fields(id=0)
-    return jsonify(last_call)
+def last_call():
+    last = Log.objects().fields(id=0)
+    return jsonify(last)
 
 # Order from Supplier
 # Order as User
