@@ -52,27 +52,30 @@ def db_get_all():
 
 # Products:
 # Return all existing Products
-@app.route('/api/product/all', methods=['GET'])
-def db_get_all_products():
+@app.route('/api/product', methods=['GET'])
+# Return a subset of all existing Products based on a set of parameters as follows:
+# color=black&size=medium&type=regular...
+@app.route('/api/product/<parameters>', methods=['GET'])
+def db_get_products(parameters: str):
     try:
-        products = Product.objects()
-        return jsonify(products), 200
+        if parameters is None:
+            products = Product.objects()
+            return jsonify(products), 200
+        else:
+            if parameters.find("&") < 0:
+                param_list = [parameters]
+            else:
+                param_list = parameters.split("&")
+            param_dict = {}
+            for param in param_list:
+                param_key, param_value = param.split("=")
+                param_dict[param_key] = param_value
+            products = Product.objects(**param_dict)
+            return jsonify(products), 200
     except Exception as e:
         return str(e), 400
 
 
-# Return a subset of all existing Products
-@app.route('/api/product/<group>', methods=['GET'])
-def db_get_product(group: str):
-    try:
-        products = Product.objects.only(group)
-        return jsonify(products), 200
-    except Exception as e:
-        return str(e), 400
-
-
-# 127.0.0.1:7777/api/product/TShirt/color=black&size=medium&type=regular
-# Return a subset of all existing Products based on a set of parameters
 @app.route('/api/product/<group>/<parameters>', methods=['GET'])
 def db_get_product_parameters(group: str, parameters: str):
     products = json.loads(Product.objects.only(group).to_json())
