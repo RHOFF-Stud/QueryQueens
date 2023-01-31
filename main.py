@@ -26,26 +26,11 @@ def db_populate():
     with open("preconfig_data.json", "r") as config_file:
         data = json.load(config_file)
         for collection in data:
-            if collection == "User":
-                for user in data[collection]:
-                    new_customer = User()
-                    for key in user:
-                        new_customer.__setattr__(key, user[key])
-                    new_customer.save()
-
-            if collection == "Product":
-                for product in data[collection]:
-                    new_product = Product()
-                    for key in product:
-                        new_product.__setattr__(key, product[key])
-                    new_product.save()
-
-            if collection == "Supplier":
-                for supplier in data[collection]:
-                    new_supplier = Supplier()
-                    for key in supplier:
-                        new_supplier.__setattr__(key, supplier[key])
-                    new_supplier.save()
+            for model in data[collection]:
+                new_doc = models[model]()
+                for key in model:
+                    new_doc.__setattr__(key, model[key])
+                new_doc.save()
         config_file.close()
     return "Saved successfully"
 

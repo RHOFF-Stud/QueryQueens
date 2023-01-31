@@ -1,4 +1,4 @@
-{"Product":  [{"TShirt": [{
+{"Product":  [{
   "_id": {
     "$oid": "63d0fcc48e2f9348609c71e5"
   },
@@ -142,9 +142,7 @@
   "color": "green",
   "amount": 5,
   "product": "t-shirt"
-}]}],
-
-
+}],
 	"Supplier": [{
   "_id": {
     "$oid": "63ce8eca6f3900c370bd88ec"
