@@ -81,7 +81,7 @@ def db_get_products(parameters=None):
 def db_product_image(product_id: str, url: str):
     try:
         Product.objects(id=product_id).update(upsert=True, **{"image_url": url})
-        return "image added successfully",
+        return "image added successfully", 203
     except Exception as e:
         return str(e), 400
 
