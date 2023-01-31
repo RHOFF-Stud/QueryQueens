@@ -77,6 +77,15 @@ def db_get_products(parameters=None):
         return str(e), 400
 
 
+@app.route('/api/product/image/<product_id>/<url>', methods=['GET'])
+def db_product_image(product_id: str, url: str):
+    try:
+        Product.objects(id=product_id).update(upsert=True, **{"image_url": url})
+        return "image added successfully",
+    except Exception as e:
+        return str(e), 400
+
+
 # Adding a product based on ID to the Shopping Cart
 # Beta version, uses the cart-ID which could be circumvented by session management
 @app.route('/api/cart/add/<ID>/<amount>', methods=['GET', 'POST'])
