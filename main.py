@@ -28,7 +28,7 @@ def db_populate():
             data = json.load(config_file)
             for collection in data:
                 for model in data[collection]:
-                    new_doc = models[model]()
+                    new_doc = models[collection]()
                     for key in model:
                         new_doc.__setattr__(key, model[key])
                     new_doc.save()
@@ -57,7 +57,7 @@ def db_get_all():
 # Return a subset of all existing Products based on a set of parameters as follows:
 # color=black&size=medium&type=regular...
 @app.route('/api/product/<parameters>', methods=['GET'])
-def db_get_products(parameters: str):
+def db_get_products(parameters=None):
     try:
         if parameters is None:
             products = Product.objects()
@@ -79,11 +79,11 @@ def db_get_products(parameters: str):
 
 # Adding a product based on ID to the Shopping Cart
 # Beta version, uses the cart-ID which could be circumvented by session management
-@app.route('/api/cart/add/<group>/<ID>/<amount>', methods=['GET', 'POST'])
-@app.route('/api/cart/add/<group>/<ID>/<amount>/<cart_id>', methods=['GET', 'POST'])
-def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
+@app.route('/api/cart/add/<ID>/<amount>', methods=['GET', 'POST'])
+@app.route('/api/cart/add/<ID>/<amount>/<cart_id>', methods=['GET', 'POST'])
+def db_cart_add(ID: str, amount: int, cart_id=None):
     try:
-        product = json.loads(Product.objects(product=group, id=ID).to_json())
+        product = json.loads(Product.objects(id=ID).to_json())
         if product.__len__() == 0:
             return "No product with that ID found", 404
         else:
@@ -98,7 +98,7 @@ def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
                     else:
                         Cart.objects(id=cart_id).update(upsert=True, **{ID: int(amount)})
                         Log.objects().update(upsert=True, **{"Last": time.time()})
-                    return "Cart updated",
+                    return "Cart updated", 203
             else:
                 new_cart = Cart()
                 new_cart.__setattr__(ID, int(amount))
@@ -120,25 +120,28 @@ def db_nuke_cart(cart_id: str):
         return str(e), 400
 
 
-# For Placing an Order as a Guest
-@app.route('/api/order/guest/<cart_id>', methods=['GET', 'POST'])
-@app.route('/api/order/guest/<cart_id>/<data>', methods=['GET', 'POST'])
-def db_guest_order(cart_id: str, data: str):
+# For Placing an Order
+@app.route('/api/order/<cart_id>', methods=['GET', 'POST'])
+@app.route('/api/order/<cart_id>/<data>', methods=['GET', 'POST'])
+def db_order(cart_id: str, data=None):
     try:
         cart = json.loads(Cart.objects(id=cart_id).fields(id=0).to_json())
 
         if cart.__len__() == 0:
             return "Cart not found", 404
         else:
+            total_price = 0.0
             for entry in cart[0]:
                 product = json.loads(Product.objects(id=entry).to_json())[0]
+                # Calculate price
+                total_price += float(cart[0][entry]) * float(product["price"])
+                # Update the amounts of that product in the warehouse
                 Product.objects(id=entry).update(**{"amount": product["amount"] - cart[0][entry]})
 
             new_order = Order()
             new_order.order_time = time.time()
             new_order.items = cart[0]
-
-            # Price Calculation
+            new_order.cost = str(total_price) + "€"
 
             if data is not None:
                 if data.find("&") < 0:
@@ -147,19 +150,18 @@ def db_guest_order(cart_id: str, data: str):
                     param_list = data.split("&")
                 for param in param_list:
                     param_key, param_value = param.split("=")
-                    if param_key not in ["items", "order_time", "price"]:
-                        new_order.param_key = param_value
+                    if param_key == "id":
+                        info = json.loads(User.objects(id=param_value).fields(username=0, password=0, id=0).to_json())[0]
+                        for key in info:
+                            new_order.__setattr__(key, info[key])
+                    elif param_key not in ["items", "order_time", "cost"]:
+                        new_order.__setattr__(param_key, param_value)
 
             new_order.save()
             Log.objects().update(upsert=True, **{"Last": time.time()})
-
-            # Deleting the cart
-            Cart.objects(id=cart_id).delete()
             return "Order created", 201
     except Exception as e:
         return str(e), 400
-
-# Order as User
 
 
 # create a new user with the given username and password
@@ -198,10 +200,10 @@ def user_authenticate(username: str, password: str):
 
 
 # Return all user data except their password
-@app.route('/api/user/data/<username>', methods=['GET', 'POST'])
-def user_data(username: str):
+@app.route('/api/user/data/<user_id>', methods=['GET', 'POST'])
+def user_data(user_id: str):
     try:
-        user = User.objects(username=username).fields(password=0)
+        user = User.objects(id=user_id).fields(password=0, id=0)
         return jsonify(user), 200
     except Exception as e:
         return str(e), 400
@@ -218,10 +220,10 @@ def user_delete(user_id: str):
 
 
 # Change User data
-@app.route('/api/user/edit/<user_id>/<field>/<change>', methods=['GET', 'POST'])
+@app.route('/api/user/edit/<user_id>/<field>=<change>', methods=['GET', 'POST'])
 def user_edit(user_id: str, field: str, change: str):
     try:
-        User.objects(id=user_id).update(**{field: change})
+        User.objects(id=user_id).update(upsert=True, **{field: change})
         return "User edited successfully", 203
     except Exception as e:
         return str(e), 400

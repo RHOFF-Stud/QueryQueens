@@ -6,7 +6,8 @@
   "size": "small",
   "color": "black",
   "amount": 7,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d0fd0c8e2f9348609c71e9"
@@ -15,7 +16,8 @@
   "size": "medium",
   "color": "black",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d0fd1d8e2f9348609c71eb"
@@ -24,7 +26,8 @@
   "size": "large",
   "color": "black",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d0fd6e8e2f9348609c71ed"
@@ -33,7 +36,8 @@
   "size": "extra_large",
   "color": "black",
   "amount": 5,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d0fe278e2f9348609c71f1"
@@ -42,7 +46,8 @@
   "size": "small",
   "color": "white",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d0fe458e2f9348609c71f4"
@@ -51,7 +56,8 @@
   "size": "medium",
   "color": "white",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d0fe518e2f9348609c71f6"
@@ -60,7 +66,8 @@
   "size": "large",
   "color": "white",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d0fe678e2f9348609c71f8"
@@ -69,7 +76,8 @@
   "size": "extra_large",
   "color": "white",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d102d58e2f9348609c71fe"
@@ -78,7 +86,8 @@
   "size": "small",
   "color": "red",
   "amount": 7,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d102d58e2f9348609c71ff"
@@ -87,7 +96,8 @@
   "size": "medium",
   "color": "red",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d102d58e2f9348609c7200"
@@ -96,7 +106,8 @@
   "size": "large",
   "color": "red",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d102d58e2f9348609c7201"
@@ -105,7 +116,8 @@
   "size": "extra_large",
   "color": "red",
   "amount": 5,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d10a3f8e2f9348609c7203"
@@ -114,7 +126,8 @@
   "size": "small",
   "color": "blue",
   "amount": 7,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d10a3f8e2f9348609c7204"
@@ -123,7 +136,8 @@
   "size": "medium",
   "color": "blue",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d10a3f8e2f9348609c7205"
@@ -132,7 +146,8 @@
   "size": "large",
   "color": "yellow",
   "amount": 4,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 },{
   "_id": {
     "$oid": "63d10a3f8e2f9348609c7206"
@@ -141,7 +156,8 @@
   "size": "extra_large",
   "color": "green",
   "amount": 5,
-  "product": "t-shirt"
+  "product": "t-shirt",
+  "price": 15.00
 }],
 	"Supplier": [{
   "_id": {
