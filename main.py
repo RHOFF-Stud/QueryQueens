@@ -76,40 +76,6 @@ def db_get_products(parameters: str):
         return str(e), 400
 
 
-@app.route('/api/product/<group>/<parameters>', methods=['GET'])
-def db_get_product_parameters(group: str, parameters: str):
-    products = json.loads(Product.objects.only(group).to_json())
-
-    matches = {group: []}
-
-    index = parameters.find("&")
-    if index < 0:
-        param_list = [parameters]
-    else:
-        param_list = parameters.split("&")
-
-    for product in products:
-        for obj in product[group]:
-            param_key, param_value = param_list[0].split("=")
-            for key in obj:
-                if key == param_key and obj[key] == param_value:
-                    matches[group].append(obj)
-
-            if index > 0:
-                for p in param_list[1:]:
-                    param_key, param_value = p.split("=")
-                    for match in matches[group]:
-                        found_match = False
-                        for key in match:
-                            if key == param_key and match[key] == param_value:
-                                found_match = True
-                                break
-                        if not found_match:
-                            matches[group].remove(match)
-
-    return jsonify(matches), 200
-
-
 # Adding a product based on ID to the Shopping Cart
 # Beta version, uses the cart-ID which could be circumvented by session management
 @app.route('/api/cart/add/<group>/<ID>/<amount>', methods=['GET', 'POST'])
