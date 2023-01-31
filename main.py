@@ -33,7 +33,8 @@ def db_populate():
                         new_doc.__setattr__(key, model[key])
                     new_doc.save()
             config_file.close()
-        return "Saved successfully"
+            Log.objects().update(upsert=True, **{"Last": time.time()})
+        return "Saved successfully", 201
     except Exception as e:
         return str(e), 400
 
@@ -89,11 +90,7 @@ def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
             if cart_id is not None:
                 cart = json.loads(Cart.objects(id=cart_id).to_json())
                 if cart.__len__() == 0:
-                    new_cart = Cart()
-                    new_cart.__setattr__(ID, int(amount))
-                    new_cart.save()
-                    Log.objects().update(upsert=True, **{"Last": time.time()})
-                    return "New Cart created", 201
+                    return "No cart with that ID found", 404
                 else:
                     if ID in cart[0].keys():
                         Cart.objects(id=cart_id).update(**{ID: int(cart[0][ID]) + int(amount)})
@@ -107,7 +104,7 @@ def db_cart_add(group: str, ID: str, cart_id: str, amount: int):
                 new_cart.__setattr__(ID, int(amount))
                 new_cart.save()
                 Log.objects().update(upsert=True, **{"Last": time.time()})
-                return "New Cart created", 201
+                return "New Cart created as ID:" + str(new_cart.id), 201
     except Exception as e:
         return str(e), 400
 
@@ -124,7 +121,7 @@ def db_nuke_cart(cart_id: str):
 
 
 # For Placing an Order as a Guest
-# Shipment data is passed as a string in the API-Call, this could be optimized
+@app.route('/api/order/guest/<cart_id>', methods=['GET', 'POST'])
 @app.route('/api/order/guest/<cart_id>/<data>', methods=['GET', 'POST'])
 def db_guest_order(cart_id: str, data: str):
     try:
@@ -137,11 +134,22 @@ def db_guest_order(cart_id: str, data: str):
                 product = json.loads(Product.objects(id=entry).to_json())[0]
                 Product.objects(id=entry).update(**{"amount": product["amount"] - cart[0][entry]})
 
-            # Placing the Order (Missing price calculation)
             new_order = Order()
-            new_order.shipment_data = data
             new_order.order_time = time.time()
             new_order.items = cart[0]
+
+            # Price Calculation
+
+            if data is not None:
+                if data.find("&") < 0:
+                    param_list = [data]
+                else:
+                    param_list = data.split("&")
+                for param in param_list:
+                    param_key, param_value = param.split("=")
+                    if param_key not in ["items", "order_time", "price"]:
+                        new_order.param_key = param_value
+
             new_order.save()
             Log.objects().update(upsert=True, **{"Last": time.time()})
 
@@ -151,9 +159,10 @@ def db_guest_order(cart_id: str, data: str):
     except Exception as e:
         return str(e), 400
 
+# Order as User
 
-# Version 2.0
-# create a new user with the given username nad password
+
+# create a new user with the given username and password
 @app.route('/api/user/create/<username>/<password>', methods=['GET', 'POST'])
 def user_create(username: str, password: str):
     try:
@@ -164,7 +173,7 @@ def user_create(username: str, password: str):
             new_user.password = password
             new_user.save()
             Log.objects().update(upsert=True, **{"Last": time.time()})
-            return "User created", 201
+            return "User created as ID:" + str(new_user.id), 201
         else:
             return "User with that username already exists", 409
     except Exception as e:
@@ -181,7 +190,7 @@ def user_authenticate(username: str, password: str):
             return "No User with that Username was found", 404
         else:
             if user[0]["password"] == password:
-                return "User authenticated", 200
+                return "User authenticated as ID:" + str(user[0]["_id"]["$oid"]), 200
             else:
                 return "Incorrect password", 401
     except Exception as e:
@@ -192,8 +201,28 @@ def user_authenticate(username: str, password: str):
 @app.route('/api/user/data/<username>', methods=['GET', 'POST'])
 def user_data(username: str):
     try:
-        user = User.objects(username=username).fields(password=0, id=0)
+        user = User.objects(username=username).fields(password=0)
         return jsonify(user), 200
+    except Exception as e:
+        return str(e), 400
+
+
+# Delete User
+@app.route('/api/user/nuke/<user_id>', methods=['GET', 'POST'])
+def user_delete(user_id: str):
+    try:
+        User.objects(id=user_id).delete()
+        return "Deleted successfully", 202
+    except Exception as e:
+        return str(e), 400
+
+
+# Change User data
+@app.route('/api/user/edit/<user_id>/<field>/<change>', methods=['GET', 'POST'])
+def user_edit(user_id: str, field: str, change: str):
+    try:
+        User.objects(id=user_id).update(**{field: change})
+        return "User edited successfully", 203
     except Exception as e:
         return str(e), 400
 
@@ -206,10 +235,6 @@ def last_call():
         return jsonify(last)
     except Exception as e:
         return str(e), 400
-
-# Delete User
-# Change User Data
-# Order as User
 
 
 if __name__ == '__main__':
