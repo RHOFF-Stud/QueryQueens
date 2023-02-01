@@ -14,12 +14,12 @@ try:
     db = MongoEngine()
     app.config["MONGODB_SETTINGS"] = [
         {
-            #"db": os.getenv('DATABASE'),
-            #"host": os.getenv('HOST'),
-            "host": "mongodb+srv://queryqueens:SuperSicher123.@cluster0.r9xszy9.mongodb.net/test"
-            #"port": int(os.getenv('PORT')),
-            #"user": os.getenv('USER'),
-            #"password": os.getenv('PASSWORD')
+            "db": os.getenv('DATABASE'),
+            "host": os.getenv('HOST'),
+            #"host": "mongodb+srv://queryqueens:SuperSicher123.@cluster0.r9xszy9.mongodb.net/test"
+            "port": int(os.getenv('PORT')),
+            "user": os.getenv('USER'),
+            "password": os.getenv('PASSWORD')
         }
     ]
 
