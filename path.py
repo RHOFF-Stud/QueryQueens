@@ -18,8 +18,6 @@ try:
             "host": os.getenv('HOST'),
             #"host": "mongodb+srv://queryqueens:SuperSicher123.@cluster0.r9xszy9.mongodb.net/test"
             "port": int(os.getenv('PORT')),
-            "user": os.getenv('USER'),
-            "password": os.getenv('PASSWORD')
         }
     ]
 
