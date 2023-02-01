@@ -16,6 +16,7 @@ RUN pip3 install -r ./requirements.txt
 
 COPY .env ./
 COPY *.py ./
+COPY *.json ./
 
 EXPOSE 80
 
