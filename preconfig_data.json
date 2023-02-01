@@ -4,308 +4,352 @@
   "color": "black",
   "amount": 7,
   "product": "t-shirt",
-  "price": 14.00
+  "price": 14.00,
+  "url": "../src/assets/t-shirtSchwarz.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 17.00
+  "price": 17.00,
+  "url": "../src/assets/t-shirtSchwarz.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.90
+  "price": 15.90,
+  "url": "../src/assets/t-shirtSchwarz.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "black",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.99
+  "price": 15.99,
+  "url": "../src/assets/t-shirtSchwarz.jpg"
 },{
   "type": "regular",
   "size": "small",
   "color": "white",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "white",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "regular",
   "size": "small",
-  "color": "red",
+  "color": "rot",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/rot.jpg"
 },{
   "type": "regular",
   "size": "medium",
-  "color": "red",
+  "color": "rot",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/rot.jpg"
 },{
   "type": "regular",
   "size": "large",
-  "color": "red",
+  "color": "rot",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/rot.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
-  "color": "red",
+  "color": "rot",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/rot.jpg"
 },{
   "type": "regular",
   "size": "small",
   "color": "blue",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtBlau.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "blue",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtBlau.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "blue",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtBlau.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "blue",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtBlau.jpg"
 },{
   "type": "regular",
   "size": "small",
   "color": "green",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtDunkelGrün.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "green",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtDunkelGrün.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "green",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtDunkelGrün.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "green",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtDunkelGrün.jpg"
 },{
   "type": "slim_fit",
   "size": "small",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "slim_fit",
   "size": "medium",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "slim_fit",
   "size": "large",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "slim_fit",
   "size": "extra_large",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/t-shirtWeiß.jpg"
 },{
   "type": "slim_fit",
   "size": "small",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "slim_fit",
   "size": "medium",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "slim_fit",
   "size": "large",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "slim_fit",
   "size": "extra_large",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "women",
   "size": "small",
   "color": "red",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/red.jpg"
 },{
   "type": "women",
   "size": "medium",
   "color": "red",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/red.jpg"
 },{
   "type": "women",
   "size": "large",
   "color": "red",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/red.jpg"
 },{
   "type": "women",
   "size": "extra_large",
   "color": "red",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/red.jpg"
 },{
   "type": "women",
   "size": "small",
   "color": "yellow",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/gelb.jpg"
 },{
   "type": "women",
   "size": "medium",
   "color": "yellow",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/gelb.jpg"
 },{
   "type": "women",
   "size": "large",
   "color": "yellow",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/gelb.jpg"
 },{
   "type": "women",
   "size": "extra_large",
   "color": "yellow",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/gelb.jpg"
 },{
   "type": "women",
   "size": "small",
   "color": "black",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "women",
   "size": "medium",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "women",
   "size": "large",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "women",
   "size": "extra_large",
   "color": "black",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/slimschwarz.jpg"
 },{
   "type": "women",
   "size": "small",
   "color": "white",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/weiß.jpg"
 },{
   "type": "women",
   "size": "medium",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/weiß.jpg"
 },{
   "type": "women",
   "size": "large",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/weiß.jpg"
 },{
   "type": "women",
   "size": "extra_large",
   "color": "white",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/weiß.jpg"
 },
 {
   "type": "women",
@@ -313,252 +357,288 @@
   "color": "blue",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/babyblau.jpg"
 },{
   "type": "women",
   "size": "medium",
   "color": "blue",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/babyblau.jpg"
 },{
   "type": "women",
   "size": "large",
   "color": "blue",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/babyblau.jpg"
 },{
   "type": "women",
   "size": "extra_large",
   "color": "blue",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.00,
+  "url": "../src/assets/babyblau.jpg"
 },{
   "type": "polo",
   "size": "small",
   "color": "red",
   "amount": 7,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/polorot.jpg"
 },{
   "type": "polo",
   "size": "medium",
   "color": "red",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/polorot.jpg"
 },{
   "type": "polo",
   "size": "large",
   "color": "red",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/polorot.jpg"
 },{
   "type": "polo",
   "size": "extra_large",
   "color": "red",
   "amount": 5,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/polorot.jpg"
 },{
   "type": "polo",
   "size": "small",
   "color": "black",
   "amount": 7,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloschwarz.jpg"
 },{
   "type": "polo",
   "size": "medium",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloschwarz.jpg"
 },{
   "type": "polo",
   "size": "large",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloschwarz.jpg"
 },{
   "type": "polo",
   "size": "extra_large",
   "color": "black",
   "amount": 5,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloschwarz.jpg"
 },{
   "type": "polo",
   "size": "small",
   "color": "white",
   "amount": 7,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloweiß.jpg"
 },{
   "type": "polo",
   "size": "medium",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloweiß.jpg"
 },{
   "type": "polo",
   "size": "large",
   "color": "white",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloweiß.jpg"
 },{
   "type": "polo",
   "size": "extra_large",
   "color": "white",
   "amount": 5,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/poloweiß.jpg"
 },{
   "type": "polo",
   "size": "small",
   "color": "blue",
   "amount": 7,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/tshirtBlau.jpg"
 },{
   "type": "polo",
   "size": "medium",
   "color": "blue",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/tshirtBlau.jpg"
 },{
   "type": "polo",
   "size": "large",
   "color": "blue",
   "amount": 4,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/tshirtBlau.jpg"
 },{
   "type": "polo",
   "size": "extra_large",
   "color": "blue",
   "amount": 5,
   "product": "t-shirt",
-  "price": 19.90
+  "price": 19.90,
+  "url": "../src/assets/tshirtBlau.jpg"
 },{
   "type": "regular",
   "size": "small",
   "color": "black",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieschwarz.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "black",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieschwarz.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "black",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieschwarz.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "black",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieschwarz.jpg"
 },{
   "type": "regular",
   "size": "small",
   "color": "white",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieweiß.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "white",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieweiß.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "white",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieweiß.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "white",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieblau.jpg"
 },{
   "type": "regular",
   "size": "small",
   "color": "blue",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieblau.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "blue",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieblau.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "blue",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieblau.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "blue",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieblau.jpg"
 },{
   "type": "regular",
   "size": "small",
   "color": "red",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieweinrot.jpg"
 },{
   "type": "regular",
   "size": "medium",
   "color": "red",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieweinrot.jpg"
 },{
   "type": "regular",
   "size": "large",
   "color": "red",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieweinrot.jpg"
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "red",
   "amount": 4,
   "product": "hoodie",
-  "price": 39.90
+  "price": 39.90,
+  "url": "../src/assets/hoodieweinrot.jpg"
 }],
 	"Supplier": [{
   "_id": {
