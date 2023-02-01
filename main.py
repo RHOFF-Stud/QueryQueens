@@ -118,6 +118,16 @@ def db_cart_add(ID: str, amount: int, cart_id=None):
         return str(e), 400
 
 
+# For getting a cart
+@app.route('/api/cart/get/<cart_id>', methods=['GET', 'POST'])
+def db_cart_get(cart_id=None):
+    try:
+        cart = Cart.objects(id=cart_id)
+        return jsonify(cart)
+    except Exception as e:
+        return str(e), 400
+
+
 # For clearing the entire cart
 # In 2.0: Method to only clear specific items
 @app.route('/api/cart/nuke/<cart_id>', methods=['GET', 'POST'])
