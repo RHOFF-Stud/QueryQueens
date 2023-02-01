@@ -17,4 +17,6 @@ RUN pip3 install -r ./requirements.txt
 COPY .env ./
 COPY *.py ./
 
+EXPOSE 80
+
 CMD ["python3", "/src/main.py"]
