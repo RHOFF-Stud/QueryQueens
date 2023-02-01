@@ -4,28 +4,28 @@
   "color": "black",
   "amount": 7,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 14.00
 },{
   "type": "regular",
   "size": "medium",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 17.00
 },{
   "type": "regular",
   "size": "large",
   "color": "black",
   "amount": 4,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.90
 },{
   "type": "regular",
   "size": "extra_large",
   "color": "black",
   "amount": 5,
   "product": "t-shirt",
-  "price": 15.00
+  "price": 15.99
 },{
   "type": "regular",
   "size": "small",
